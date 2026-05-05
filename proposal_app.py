@@ -286,30 +286,37 @@ with tab_proposal:
         st.components.v1.html(proposal_html, height=780, scrolling=True)
 
         st.divider()
+        proposal_for = st.text_input(
+            "Proposal for",
+            placeholder="e.g. Acme Restaurants LLC or John Smith",
+            help="Used as the exported file name."
+        )
+        safe_name = "".join(c if c.isalnum() or c in " _-" else "_" for c in proposal_for).strip() or "proposal"
+
         exp_col1, exp_col2 = st.columns([1, 2])
         with exp_col1:
             export_fmt = st.radio("Export format", ["PDF", "Image (PNG)", "Email HTML"])
         with exp_col2:
             if st.button("Generate & Download", type="primary"):
                 if export_fmt == "Email HTML":
-                    out = os.path.join(EXPORTS_DIR, "proposal.html")
+                    out = os.path.join(EXPORTS_DIR, f"{safe_name}.html")
                     export_html_file(proposal_html, out)
                     with open(out, 'rb') as f:
-                        st.download_button("Download HTML", f, file_name="proposal.html", mime="text/html")
+                        st.download_button("Download HTML", f, file_name=f"{safe_name}.html", mime="text/html")
                 elif export_fmt == "PDF":
                     try:
-                        out = os.path.join(EXPORTS_DIR, "proposal.pdf")
+                        out = os.path.join(EXPORTS_DIR, f"{safe_name}.pdf")
                         export_pdf(proposal_html, out)
                         with open(out, 'rb') as f:
-                            st.download_button("Download PDF", f, file_name="proposal.pdf", mime="application/pdf")
+                            st.download_button("Download PDF", f, file_name=f"{safe_name}.pdf", mime="application/pdf")
                     except Exception as e:
                         st.error(f"PDF export failed: {e}")
                 elif export_fmt == "Image (PNG)":
                     try:
-                        out = os.path.join(EXPORTS_DIR, "proposal.png")
+                        out = os.path.join(EXPORTS_DIR, f"{safe_name}.png")
                         export_image(proposal_html, out)
                         with open(out, 'rb') as f:
-                            st.download_button("Download PNG", f, file_name="proposal.png", mime="image/png")
+                            st.download_button("Download PNG", f, file_name=f"{safe_name}.png", mime="image/png")
                     except Exception as e:
                         st.error(f"Image export failed: {e}")
 

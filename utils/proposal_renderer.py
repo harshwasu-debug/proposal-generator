@@ -180,21 +180,26 @@ def export_html_file(html: str, path: str):
     return path
 
 
-def export_pdf(html: str, path: str):
-    import weasyprint
+def _html_to_pdf(html: str, pdf_path: str):
+    from xhtml2pdf import pisa
     full = f'<!DOCTYPE html><html><head><meta charset="utf-8"></head><body style="margin:30px;">{html}</body></html>'
-    weasyprint.HTML(string=full).write_pdf(path)
+    with open(pdf_path, 'wb') as f:
+        result = pisa.CreatePDF(full, dest=f)
+    if result.err:
+        raise RuntimeError(f"xhtml2pdf error: {result.err}")
+
+
+def export_pdf(html: str, path: str):
+    _html_to_pdf(html, path)
     return path
 
 
 def export_image(html: str, path: str):
     import tempfile
     from pdf2image import convert_from_path
-    full = f'<!DOCTYPE html><html><head><meta charset="utf-8"></head><body style="margin:30px;background:white;">{html}</body></html>'
     with tempfile.NamedTemporaryFile(suffix='.pdf', delete=False) as tmp:
         tmp_pdf = tmp.name
-    import weasyprint
-    weasyprint.HTML(string=full).write_pdf(tmp_pdf)
+    _html_to_pdf(html, tmp_pdf)
     pages = convert_from_path(tmp_pdf, dpi=150, first_page=1, last_page=1)
     pages[0].save(path, 'PNG')
     os.remove(tmp_pdf)

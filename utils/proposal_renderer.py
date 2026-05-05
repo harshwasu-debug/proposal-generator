@@ -180,27 +180,59 @@ def export_html_file(html: str, path: str):
     return path
 
 
-def _html_to_pdf(html: str, pdf_path: str):
-    from xhtml2pdf import pisa
-    full = f'<!DOCTYPE html><html><head><meta charset="utf-8"></head><body style="margin:30px;">{html}</body></html>'
-    with open(pdf_path, 'wb') as f:
-        result = pisa.CreatePDF(full, dest=f)
-    if result.err:
-        raise RuntimeError(f"xhtml2pdf error: {result.err}")
+_CHROMIUM_CANDIDATES = [
+    '/usr/bin/chromium',
+    '/usr/bin/chromium-browser',
+    '/usr/bin/google-chrome',
+    '/usr/bin/google-chrome-stable',
+]
+
+def _chromium_exe():
+    for p in _CHROMIUM_CANDIDATES:
+        if os.path.exists(p):
+            return p
+    raise RuntimeError(
+        "No Chromium/Chrome binary found. "
+        "Ensure 'chromium' is listed in packages.txt."
+    )
+
+def _full_html(html: str) -> str:
+    return (
+        '<!DOCTYPE html><html><head><meta charset="utf-8"></head>'
+        '<body style="margin:24px;background:white;">'
+        f'{html}</body></html>'
+    )
+
+def _playwright_page(pw, viewport_width=860):
+    exe = _chromium_exe()
+    browser = pw.chromium.launch(
+        executable_path=exe,
+        args=['--no-sandbox', '--disable-setuid-sandbox', '--disable-dev-shm-usage'],
+    )
+    page = browser.new_page(viewport={'width': viewport_width, 'height': 800})
+    return browser, page
 
 
 def export_pdf(html: str, path: str):
-    _html_to_pdf(html, path)
+    from playwright.sync_api import sync_playwright
+    with sync_playwright() as pw:
+        browser, page = _playwright_page(pw)
+        page.set_content(_full_html(html), wait_until='domcontentloaded')
+        page.pdf(
+            path=path,
+            format='A4',
+            print_background=True,
+            margin={'top': '15mm', 'bottom': '15mm', 'left': '12mm', 'right': '12mm'},
+        )
+        browser.close()
     return path
 
 
 def export_image(html: str, path: str):
-    import tempfile
-    from pdf2image import convert_from_path
-    with tempfile.NamedTemporaryFile(suffix='.pdf', delete=False) as tmp:
-        tmp_pdf = tmp.name
-    _html_to_pdf(html, tmp_pdf)
-    pages = convert_from_path(tmp_pdf, dpi=150, first_page=1, last_page=1)
-    pages[0].save(path, 'PNG')
-    os.remove(tmp_pdf)
+    from playwright.sync_api import sync_playwright
+    with sync_playwright() as pw:
+        browser, page = _playwright_page(pw, viewport_width=900)
+        page.set_content(_full_html(html), wait_until='domcontentloaded')
+        page.screenshot(path=path, full_page=True)
+        browser.close()
     return path

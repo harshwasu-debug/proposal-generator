@@ -4,4 +4,4 @@ openpyxl>=3.0.0
 matplotlib>=3.5.0
 numpy>=1.20.0
 xhtml2pdf
-Pillow
+pdf2image>=1.16.0

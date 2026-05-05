@@ -100,6 +100,10 @@ def load_kitchen_df():
     with open(KITCHEN_JSON, encoding='utf-8') as f:
         data = json.load(f)
     df = pd.DataFrame(data[1:], columns=data[0])
+    # Coerce mixed-type columns to str so pyarrow doesn't choke in st.dataframe()
+    for col in ['Hood Size', 'Kitchen Size (Sq. Meters)']:
+        if col in df.columns:
+            df[col] = df[col].astype(str).replace('None', '').replace('nan', '')
     return df
 
 def get_available_kitchens():

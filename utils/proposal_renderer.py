@@ -195,6 +195,12 @@ def export_pdf(html: str, path: str):
 
 
 def export_image(html: str, path: str):
-    # PNG export requires poppler-utils system package (not available on all hosts).
-    # Download the PDF and screenshot it for WhatsApp use.
-    raise NotImplementedError("PNG export is not available on this deployment. Download the PDF instead.")
+    import tempfile
+    from pdf2image import convert_from_path
+    with tempfile.NamedTemporaryFile(suffix='.pdf', delete=False) as tmp:
+        tmp_pdf = tmp.name
+    _html_to_pdf(html, tmp_pdf)
+    pages = convert_from_path(tmp_pdf, dpi=150, first_page=1, last_page=1)
+    pages[0].save(path, 'PNG')
+    os.remove(tmp_pdf)
+    return path

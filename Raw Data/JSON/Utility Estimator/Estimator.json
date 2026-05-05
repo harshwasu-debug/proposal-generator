@@ -1,0 +1,92 @@
+[
+  [
+    "Select Facility and Kitchen Type",
+    "MC1 - Hot Kitchens",
+    "<----- Input Only Here",
+    null,
+    null,
+    null,
+    "Important Points"
+  ],
+  [
+    "Description",
+    "Highest Charge",
+    "Highest Charged Month",
+    "Lowest Charge",
+    "Lowest Charged Month",
+    "Average - 12 months",
+    "1. Direct Utilities are subjective to consumption based on individual meter"
+  ],
+  [
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null
+  ],
+  [
+    "Direct Gas",
+    2727.87,
+    "2025-04-01 00:00:00",
+    1875.31,
+    "2025-03-01 00:00:00",
+    2493.501538,
+    "2. Extration Electricity is only for hot kitchens"
+  ],
+  [
+    "Direct Elec",
+    489.14,
+    "2025-08-01 00:00:00",
+    304.86,
+    "2025-03-01 00:00:00",
+    432.0105917,
+    "3. Others include - Water, Facility Cleaning, Garbage Collection, Maintenance, Internet, Pest Control and Sewage"
+  ],
+  [
+    "Shared Electricity (Extraction, AC, Common Area)",
+    1081.34,
+    "2026-03-01 00:00:00",
+    753.62,
+    "2025-05-01 00:00:00",
+    896.7269231,
+    null
+  ],
+  [
+    "Chilled Water",
+    3381.02,
+    "2025-09-01 00:00:00",
+    765,
+    "2026-01-01 00:00:00",
+    1886.945593,
+    "4. Maintenance include Duct cleaning (Hot only), Ecology and FAHU filter (Hot only), Water dispenser & Ice machine filter cost, Grease trap cleaning and Waste management (DSO only)"
+  ],
+  [
+    "Other (Pest, Maintainence, Internet, etc)",
+    2055.59,
+    "2026-02-01 00:00:00",
+    1477.02,
+    "2025-06-01 00:00:00",
+    1834.653077,
+    null
+  ],
+  [
+    "Total",
+    9734.96,
+    null,
+    5175.81,
+    null,
+    7543.837723,
+    null
+  ],
+  [
+    "Total - Shared Only (Other + Chilled Water + Shared Elec) ",
+    6517.95,
+    null,
+    2995.64,
+    null,
+    4618.325593,
+    null
+  ]
+]

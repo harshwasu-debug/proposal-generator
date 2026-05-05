@@ -1,0 +1,38 @@
+[
+  [
+    "Description",
+    "2026-01-01 00:00:00",
+    "2026-02-01 00:00:00",
+    "2026-03-01 00:00:00"
+  ],
+  [
+    "Direct Gas",
+    199.6,
+    1137.33,
+    1350.27
+  ],
+  [
+    "Direct Elec",
+    118.86,
+    447.58,
+    397.02
+  ],
+  [
+    "Shared Electricity (Extraction (hot),  AC, Common Area)",
+    106.99,
+    324.16,
+    621.02
+  ],
+  [
+    "Chilled Water",
+    105.46,
+    161.8,
+    237.33
+  ],
+  [
+    "Other (Pest, Maintainence, Internet, etc)",
+    1718.21,
+    1472.23,
+    1407
+  ]
+]

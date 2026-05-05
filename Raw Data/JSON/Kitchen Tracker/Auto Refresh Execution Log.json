@@ -1,0 +1,709 @@
+[
+  [
+    "Refresh Time",
+    "Sheet",
+    "Operation",
+    "Status",
+    "User"
+  ],
+  [
+    "2026-05-05 18:27:43.232000",
+    "UAE Churn data",
+    "Report Id: 00OVO00000120kv2AA",
+    "Success",
+    "jad.hajjar@cloudkitchens.com"
+  ],
+  [
+    "2026-05-05 18:27:43.232000",
+    "SF Churn Data",
+    "Report Id: 00OVO000003tD9N2AU",
+    "Success",
+    "jad.hajjar@cloudkitchens.com"
+  ],
+  [
+    "2026-05-05 18:27:43.232000",
+    "Proposal builder data",
+    "Report Id: 00OVO000005664f2AA",
+    "Fail",
+    "jad.hajjar@cloudkitchens.com"
+  ],
+  [
+    "2026-05-05 18:27:43.232000",
+    "BHR",
+    "Report Id: 00OVO00000JeSaX2AV",
+    "Success",
+    "jad.hajjar@cloudkitchens.com"
+  ],
+  [
+    "2026-05-05 18:27:43.232000",
+    "SF Kitchen Data",
+    "Report Id: 00O6T000006Y3wgUAC",
+    "Success",
+    "jad.hajjar@cloudkitchens.com"
+  ],
+  [
+    "2026-05-05 14:27:43.016000",
+    "UAE Churn data",
+    "Report Id: 00OVO00000120kv2AA",
+    "Success",
+    "jad.hajjar@cloudkitchens.com"
+  ],
+  [
+    "2026-05-05 14:27:43.016000",
+    "SF Churn Data",
+    "Report Id: 00OVO000003tD9N2AU",
+    "Success",
+    "jad.hajjar@cloudkitchens.com"
+  ],
+  [
+    "2026-05-05 14:27:43.016000",
+    "Proposal builder data",
+    "Report Id: 00OVO000005664f2AA",
+    "Fail",
+    "jad.hajjar@cloudkitchens.com"
+  ],
+  [
+    "2026-05-05 14:27:43.016000",
+    "BHR",
+    "Report Id: 00OVO00000JeSaX2AV",
+    "Success",
+    "jad.hajjar@cloudkitchens.com"
+  ],
+  [
+    "2026-05-05 14:27:43.016000",
+    "SF Kitchen Data",
+    "Report Id: 00O6T000006Y3wgUAC",
+    "Success",
+    "jad.hajjar@cloudkitchens.com"
+  ],
+  [
+    "2026-05-05 10:27:44.185000",
+    "UAE Churn data",
+    "Report Id: 00OVO00000120kv2AA",
+    "Success",
+    "jad.hajjar@cloudkitchens.com"
+  ],
+  [
+    "2026-05-05 10:27:44.185000",
+    "SF Churn Data",
+    "Report Id: 00OVO000003tD9N2AU",
+    "Success",
+    "jad.hajjar@cloudkitchens.com"
+  ],
+  [
+    "2026-05-05 10:27:44.185000",
+    "Proposal builder data",
+    "Report Id: 00OVO000005664f2AA",
+    "Fail",
+    "jad.hajjar@cloudkitchens.com"
+  ],
+  [
+    "2026-05-05 10:27:44.185000",
+    "BHR",
+    "Report Id: 00OVO00000JeSaX2AV",
+    "Success",
+    "jad.hajjar@cloudkitchens.com"
+  ],
+  [
+    "2026-05-05 10:27:44.185000",
+    "SF Kitchen Data",
+    "Report Id: 00O6T000006Y3wgUAC",
+    "Success",
+    "jad.hajjar@cloudkitchens.com"
+  ],
+  [
+    "2026-05-05 06:27:42.953000",
+    "UAE Churn data",
+    "Report Id: 00OVO00000120kv2AA",
+    "Success",
+    "jad.hajjar@cloudkitchens.com"
+  ],
+  [
+    "2026-05-05 06:27:42.953000",
+    "SF Churn Data",
+    "Report Id: 00OVO000003tD9N2AU",
+    "Success",
+    "jad.hajjar@cloudkitchens.com"
+  ],
+  [
+    "2026-05-05 06:27:42.953000",
+    "Proposal builder data",
+    "Report Id: 00OVO000005664f2AA",
+    "Fail",
+    "jad.hajjar@cloudkitchens.com"
+  ],
+  [
+    "2026-05-05 06:27:42.953000",
+    "BHR",
+    "Report Id: 00OVO00000JeSaX2AV",
+    "Success",
+    "jad.hajjar@cloudkitchens.com"
+  ],
+  [
+    "2026-05-05 06:27:42.953000",
+    "SF Kitchen Data",
+    "Report Id: 00O6T000006Y3wgUAC",
+    "Success",
+    "jad.hajjar@cloudkitchens.com"
+  ],
+  [
+    "2026-05-05 02:27:45.296000",
+    "UAE Churn data",
+    "Report Id: 00OVO00000120kv2AA",
+    "Success",
+    "jad.hajjar@cloudkitchens.com"
+  ],
+  [
+    "2026-05-05 02:27:45.296000",
+    "SF Churn Data",
+    "Report Id: 00OVO000003tD9N2AU",
+    "Success",
+    "jad.hajjar@cloudkitchens.com"
+  ],
+  [
+    "2026-05-05 02:27:45.296000",
+    "Proposal builder data",
+    "Report Id: 00OVO000005664f2AA",
+    "Fail",
+    "jad.hajjar@cloudkitchens.com"
+  ],
+  [
+    "2026-05-05 02:27:45.296000",
+    "BHR",
+    "Report Id: 00OVO00000JeSaX2AV",
+    "Success",
+    "jad.hajjar@cloudkitchens.com"
+  ],
+  [
+    "2026-05-05 02:27:45.296000",
+    "SF Kitchen Data",
+    "Report Id: 00O6T000006Y3wgUAC",
+    "Success",
+    "jad.hajjar@cloudkitchens.com"
+  ],
+  [
+    "2026-05-04 22:27:43.917000",
+    "UAE Churn data",
+    "Report Id: 00OVO00000120kv2AA",
+    "Success",
+    "jad.hajjar@cloudkitchens.com"
+  ],
+  [
+    "2026-05-04 22:27:43.917000",
+    "SF Churn Data",
+    "Report Id: 00OVO000003tD9N2AU",
+    "Success",
+    "jad.hajjar@cloudkitchens.com"
+  ],
+  [
+    "2026-05-04 22:27:43.917000",
+    "Proposal builder data",
+    "Report Id: 00OVO000005664f2AA",
+    "Fail",
+    "jad.hajjar@cloudkitchens.com"
+  ],
+  [
+    "2026-05-04 22:27:43.917000",
+    "BHR",
+    "Report Id: 00OVO00000JeSaX2AV",
+    "Success",
+    "jad.hajjar@cloudkitchens.com"
+  ],
+  [
+    "2026-05-04 22:27:43.917000",
+    "SF Kitchen Data",
+    "Report Id: 00O6T000006Y3wgUAC",
+    "Success",
+    "jad.hajjar@cloudkitchens.com"
+  ],
+  [
+    "2026-05-04 18:27:43.188000",
+    "UAE Churn data",
+    "Report Id: 00OVO00000120kv2AA",
+    "Success",
+    "jad.hajjar@cloudkitchens.com"
+  ],
+  [
+    "2026-05-04 18:27:43.188000",
+    "SF Churn Data",
+    "Report Id: 00OVO000003tD9N2AU",
+    "Success",
+    "jad.hajjar@cloudkitchens.com"
+  ],
+  [
+    "2026-05-04 18:27:43.188000",
+    "Proposal builder data",
+    "Report Id: 00OVO000005664f2AA",
+    "Fail",
+    "jad.hajjar@cloudkitchens.com"
+  ],
+  [
+    "2026-05-04 18:27:43.188000",
+    "BHR",
+    "Report Id: 00OVO00000JeSaX2AV",
+    "Success",
+    "jad.hajjar@cloudkitchens.com"
+  ],
+  [
+    "2026-05-04 18:27:43.188000",
+    "SF Kitchen Data",
+    "Report Id: 00O6T000006Y3wgUAC",
+    "Success",
+    "jad.hajjar@cloudkitchens.com"
+  ],
+  [
+    "2026-05-04 14:27:42.828000",
+    "UAE Churn data",
+    "Report Id: 00OVO00000120kv2AA",
+    "Success",
+    "jad.hajjar@cloudkitchens.com"
+  ],
+  [
+    "2026-05-04 14:27:42.828000",
+    "SF Churn Data",
+    "Report Id: 00OVO000003tD9N2AU",
+    "Success",
+    "jad.hajjar@cloudkitchens.com"
+  ],
+  [
+    "2026-05-04 14:27:42.828000",
+    "Proposal builder data",
+    "Report Id: 00OVO000005664f2AA",
+    "Fail",
+    "jad.hajjar@cloudkitchens.com"
+  ],
+  [
+    "2026-05-04 14:27:42.828000",
+    "BHR",
+    "Report Id: 00OVO00000JeSaX2AV",
+    "Success",
+    "jad.hajjar@cloudkitchens.com"
+  ],
+  [
+    "2026-05-04 14:27:42.828000",
+    "SF Kitchen Data",
+    "Report Id: 00O6T000006Y3wgUAC",
+    "Success",
+    "jad.hajjar@cloudkitchens.com"
+  ],
+  [
+    "2026-05-04 10:27:43.369000",
+    "UAE Churn data",
+    "Report Id: 00OVO00000120kv2AA",
+    "Success",
+    "jad.hajjar@cloudkitchens.com"
+  ],
+  [
+    "2026-05-04 10:27:43.369000",
+    "SF Churn Data",
+    "Report Id: 00OVO000003tD9N2AU",
+    "Success",
+    "jad.hajjar@cloudkitchens.com"
+  ],
+  [
+    "2026-05-04 10:27:43.369000",
+    "Proposal builder data",
+    "Report Id: 00OVO000005664f2AA",
+    "Fail",
+    "jad.hajjar@cloudkitchens.com"
+  ],
+  [
+    "2026-05-04 10:27:43.369000",
+    "BHR",
+    "Report Id: 00OVO00000JeSaX2AV",
+    "Success",
+    "jad.hajjar@cloudkitchens.com"
+  ],
+  [
+    "2026-05-04 10:27:43.369000",
+    "SF Kitchen Data",
+    "Report Id: 00O6T000006Y3wgUAC",
+    "Success",
+    "jad.hajjar@cloudkitchens.com"
+  ],
+  [
+    "2026-05-04 06:27:43.436000",
+    "UAE Churn data",
+    "Report Id: 00OVO00000120kv2AA",
+    "Success",
+    "jad.hajjar@cloudkitchens.com"
+  ],
+  [
+    "2026-05-04 06:27:43.436000",
+    "SF Churn Data",
+    "Report Id: 00OVO000003tD9N2AU",
+    "Success",
+    "jad.hajjar@cloudkitchens.com"
+  ],
+  [
+    "2026-05-04 06:27:43.436000",
+    "Proposal builder data",
+    "Report Id: 00OVO000005664f2AA",
+    "Fail",
+    "jad.hajjar@cloudkitchens.com"
+  ],
+  [
+    "2026-05-04 06:27:43.436000",
+    "BHR",
+    "Report Id: 00OVO00000JeSaX2AV",
+    "Success",
+    "jad.hajjar@cloudkitchens.com"
+  ],
+  [
+    "2026-05-04 06:27:43.436000",
+    "SF Kitchen Data",
+    "Report Id: 00O6T000006Y3wgUAC",
+    "Success",
+    "jad.hajjar@cloudkitchens.com"
+  ],
+  [
+    "2026-05-04 02:27:43.184000",
+    "UAE Churn data",
+    "Report Id: 00OVO00000120kv2AA",
+    "Success",
+    "jad.hajjar@cloudkitchens.com"
+  ],
+  [
+    "2026-05-04 02:27:43.184000",
+    "SF Churn Data",
+    "Report Id: 00OVO000003tD9N2AU",
+    "Success",
+    "jad.hajjar@cloudkitchens.com"
+  ],
+  [
+    "2026-05-04 02:27:43.184000",
+    "Proposal builder data",
+    "Report Id: 00OVO000005664f2AA",
+    "Fail",
+    "jad.hajjar@cloudkitchens.com"
+  ],
+  [
+    "2026-05-04 02:27:43.184000",
+    "BHR",
+    "Report Id: 00OVO00000JeSaX2AV",
+    "Success",
+    "jad.hajjar@cloudkitchens.com"
+  ],
+  [
+    "2026-05-04 02:27:43.184000",
+    "SF Kitchen Data",
+    "Report Id: 00O6T000006Y3wgUAC",
+    "Success",
+    "jad.hajjar@cloudkitchens.com"
+  ],
+  [
+    "2026-05-03 22:27:43.824000",
+    "UAE Churn data",
+    "Report Id: 00OVO00000120kv2AA",
+    "Success",
+    "jad.hajjar@cloudkitchens.com"
+  ],
+  [
+    "2026-05-03 22:27:43.824000",
+    "SF Churn Data",
+    "Report Id: 00OVO000003tD9N2AU",
+    "Success",
+    "jad.hajjar@cloudkitchens.com"
+  ],
+  [
+    "2026-05-03 22:27:43.824000",
+    "Proposal builder data",
+    "Report Id: 00OVO000005664f2AA",
+    "Fail",
+    "jad.hajjar@cloudkitchens.com"
+  ],
+  [
+    "2026-05-03 22:27:43.824000",
+    "BHR",
+    "Report Id: 00OVO00000JeSaX2AV",
+    "Success",
+    "jad.hajjar@cloudkitchens.com"
+  ],
+  [
+    "2026-05-03 22:27:43.824000",
+    "SF Kitchen Data",
+    "Report Id: 00O6T000006Y3wgUAC",
+    "Success",
+    "jad.hajjar@cloudkitchens.com"
+  ],
+  [
+    "2026-05-03 18:27:43.212000",
+    "UAE Churn data",
+    "Report Id: 00OVO00000120kv2AA",
+    "Success",
+    "jad.hajjar@cloudkitchens.com"
+  ],
+  [
+    "2026-05-03 18:27:43.212000",
+    "SF Churn Data",
+    "Report Id: 00OVO000003tD9N2AU",
+    "Success",
+    "jad.hajjar@cloudkitchens.com"
+  ],
+  [
+    "2026-05-03 18:27:43.212000",
+    "Proposal builder data",
+    "Report Id: 00OVO000005664f2AA",
+    "Fail",
+    "jad.hajjar@cloudkitchens.com"
+  ],
+  [
+    "2026-05-03 18:27:43.212000",
+    "BHR",
+    "Report Id: 00OVO00000JeSaX2AV",
+    "Success",
+    "jad.hajjar@cloudkitchens.com"
+  ],
+  [
+    "2026-05-03 18:27:43.212000",
+    "SF Kitchen Data",
+    "Report Id: 00O6T000006Y3wgUAC",
+    "Success",
+    "jad.hajjar@cloudkitchens.com"
+  ],
+  [
+    "2026-05-03 14:27:42.986000",
+    "UAE Churn data",
+    "Report Id: 00OVO00000120kv2AA",
+    "Success",
+    "jad.hajjar@cloudkitchens.com"
+  ],
+  [
+    "2026-05-03 14:27:42.986000",
+    "SF Churn Data",
+    "Report Id: 00OVO000003tD9N2AU",
+    "Success",
+    "jad.hajjar@cloudkitchens.com"
+  ],
+  [
+    "2026-05-03 14:27:42.986000",
+    "Proposal builder data",
+    "Report Id: 00OVO000005664f2AA",
+    "Fail",
+    "jad.hajjar@cloudkitchens.com"
+  ],
+  [
+    "2026-05-03 14:27:42.986000",
+    "BHR",
+    "Report Id: 00OVO00000JeSaX2AV",
+    "Success",
+    "jad.hajjar@cloudkitchens.com"
+  ],
+  [
+    "2026-05-03 14:27:42.986000",
+    "SF Kitchen Data",
+    "Report Id: 00O6T000006Y3wgUAC",
+    "Success",
+    "jad.hajjar@cloudkitchens.com"
+  ],
+  [
+    "2026-05-03 10:27:43.756000",
+    "UAE Churn data",
+    "Report Id: 00OVO00000120kv2AA",
+    "Success",
+    "jad.hajjar@cloudkitchens.com"
+  ],
+  [
+    "2026-05-03 10:27:43.756000",
+    "SF Churn Data",
+    "Report Id: 00OVO000003tD9N2AU",
+    "Success",
+    "jad.hajjar@cloudkitchens.com"
+  ],
+  [
+    "2026-05-03 10:27:43.756000",
+    "Proposal builder data",
+    "Report Id: 00OVO000005664f2AA",
+    "Fail",
+    "jad.hajjar@cloudkitchens.com"
+  ],
+  [
+    "2026-05-03 10:27:43.756000",
+    "BHR",
+    "Report Id: 00OVO00000JeSaX2AV",
+    "Success",
+    "jad.hajjar@cloudkitchens.com"
+  ],
+  [
+    "2026-05-03 10:27:43.756000",
+    "SF Kitchen Data",
+    "Report Id: 00O6T000006Y3wgUAC",
+    "Success",
+    "jad.hajjar@cloudkitchens.com"
+  ],
+  [
+    "2026-05-03 06:27:43.073000",
+    "UAE Churn data",
+    "Report Id: 00OVO00000120kv2AA",
+    "Success",
+    "jad.hajjar@cloudkitchens.com"
+  ],
+  [
+    "2026-05-03 06:27:43.073000",
+    "SF Churn Data",
+    "Report Id: 00OVO000003tD9N2AU",
+    "Success",
+    "jad.hajjar@cloudkitchens.com"
+  ],
+  [
+    "2026-05-03 06:27:43.073000",
+    "Proposal builder data",
+    "Report Id: 00OVO000005664f2AA",
+    "Fail",
+    "jad.hajjar@cloudkitchens.com"
+  ],
+  [
+    "2026-05-03 06:27:43.073000",
+    "BHR",
+    "Report Id: 00OVO00000JeSaX2AV",
+    "Success",
+    "jad.hajjar@cloudkitchens.com"
+  ],
+  [
+    "2026-05-03 06:27:43.073000",
+    "SF Kitchen Data",
+    "Report Id: 00O6T000006Y3wgUAC",
+    "Success",
+    "jad.hajjar@cloudkitchens.com"
+  ],
+  [
+    "2026-05-03 02:27:43.230000",
+    "UAE Churn data",
+    "Report Id: 00OVO00000120kv2AA",
+    "Success",
+    "jad.hajjar@cloudkitchens.com"
+  ],
+  [
+    "2026-05-03 02:27:43.230000",
+    "SF Churn Data",
+    "Report Id: 00OVO000003tD9N2AU",
+    "Success",
+    "jad.hajjar@cloudkitchens.com"
+  ],
+  [
+    "2026-05-03 02:27:43.230000",
+    "Proposal builder data",
+    "Report Id: 00OVO000005664f2AA",
+    "Fail",
+    "jad.hajjar@cloudkitchens.com"
+  ],
+  [
+    "2026-05-03 02:27:43.230000",
+    "BHR",
+    "Report Id: 00OVO00000JeSaX2AV",
+    "Success",
+    "jad.hajjar@cloudkitchens.com"
+  ],
+  [
+    "2026-05-03 02:27:43.230000",
+    "SF Kitchen Data",
+    "Report Id: 00O6T000006Y3wgUAC",
+    "Success",
+    "jad.hajjar@cloudkitchens.com"
+  ],
+  [
+    "2026-05-02 22:27:43.292000",
+    "UAE Churn data",
+    "Report Id: 00OVO00000120kv2AA",
+    "Success",
+    "jad.hajjar@cloudkitchens.com"
+  ],
+  [
+    "2026-05-02 22:27:43.292000",
+    "SF Churn Data",
+    "Report Id: 00OVO000003tD9N2AU",
+    "Success",
+    "jad.hajjar@cloudkitchens.com"
+  ],
+  [
+    "2026-05-02 22:27:43.292000",
+    "Proposal builder data",
+    "Report Id: 00OVO000005664f2AA",
+    "Fail",
+    "jad.hajjar@cloudkitchens.com"
+  ],
+  [
+    "2026-05-02 22:27:43.292000",
+    "BHR",
+    "Report Id: 00OVO00000JeSaX2AV",
+    "Success",
+    "jad.hajjar@cloudkitchens.com"
+  ],
+  [
+    "2026-05-02 22:27:43.292000",
+    "SF Kitchen Data",
+    "Report Id: 00O6T000006Y3wgUAC",
+    "Success",
+    "jad.hajjar@cloudkitchens.com"
+  ],
+  [
+    "2026-05-02 18:27:43.169000",
+    "UAE Churn data",
+    "Report Id: 00OVO00000120kv2AA",
+    "Success",
+    "jad.hajjar@cloudkitchens.com"
+  ],
+  [
+    "2026-05-02 18:27:43.169000",
+    "SF Churn Data",
+    "Report Id: 00OVO000003tD9N2AU",
+    "Success",
+    "jad.hajjar@cloudkitchens.com"
+  ],
+  [
+    "2026-05-02 18:27:43.169000",
+    "Proposal builder data",
+    "Report Id: 00OVO000005664f2AA",
+    "Fail",
+    "jad.hajjar@cloudkitchens.com"
+  ],
+  [
+    "2026-05-02 18:27:43.169000",
+    "BHR",
+    "Report Id: 00OVO00000JeSaX2AV",
+    "Success",
+    "jad.hajjar@cloudkitchens.com"
+  ],
+  [
+    "2026-05-02 18:27:43.169000",
+    "SF Kitchen Data",
+    "Report Id: 00O6T000006Y3wgUAC",
+    "Success",
+    "jad.hajjar@cloudkitchens.com"
+  ],
+  [
+    "2026-05-02 18:11:03.362000",
+    "UAE Churn data",
+    "Report Id: 00OVO00000120kv2AA",
+    "Success",
+    "mark.grehan@cloudkitchens.com"
+  ],
+  [
+    "2026-05-02 18:11:03.362000",
+    "SF Churn Data",
+    "Report Id: 00OVO000003tD9N2AU",
+    "Success",
+    "mark.grehan@cloudkitchens.com"
+  ],
+  [
+    "2026-05-02 18:11:03.362000",
+    "Proposal builder data",
+    "Report Id: 00OVO000005664f2AA",
+    "Success",
+    "mark.grehan@cloudkitchens.com"
+  ],
+  [
+    "2026-05-02 18:11:03.362000",
+    "BHR",
+    "Report Id: 00OVO00000JeSaX2AV",
+    "Success",
+    "mark.grehan@cloudkitchens.com"
+  ],
+  [
+    "2026-05-02 18:11:03.362000",
+    "SF Kitchen Data",
+    "Report Id: 00O6T000006Y3wgUAC",
+    "Success",
+    "mark.grehan@cloudkitchens.com"
+  ]
+]

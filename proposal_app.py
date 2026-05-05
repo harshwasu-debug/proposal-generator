@@ -121,7 +121,14 @@ with tab_proposal:
             unit_name    = opt['unit_name']
             cat          = kitchen_category(acc_name)
 
-            unit_row = df_all[df_all['Kitchen Number Name'] == unit_name].iloc[0]
+            _match = df_all[df_all['Kitchen Number Name'] == unit_name]
+            if _match.empty:
+                st.error(
+                    f"**Option {i+1} — '{unit_name}'** is no longer in the available inventory "
+                    f"(it may have been leased or removed). Please click **X** to remove it and add a new option."
+                )
+                continue
+            unit_row = _match.iloc[0]
             size     = unit_row.get('Kitchen Size (Sq. Meters)', '')
             hood     = unit_row.get('Hood Size', '')
             floor_p  = float(unit_row.get('Floor Price') or 0)

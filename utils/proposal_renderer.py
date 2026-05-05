@@ -233,6 +233,17 @@ def export_image(html: str, path: str):
     with sync_playwright() as pw:
         browser, page = _playwright_page(pw, viewport_width=900)
         page.set_content(_full_html(html), wait_until='domcontentloaded')
-        page.screenshot(path=path, full_page=True)
+        # Measure the exact content height so we crop out all trailing whitespace
+        content_height = page.evaluate("""() => {
+            const children = document.body.children;
+            if (!children.length) return document.body.scrollHeight;
+            const last = children[children.length - 1];
+            return Math.ceil(last.getBoundingClientRect().bottom) + 24;
+        }""")
+        content_width = page.evaluate("() => document.body.scrollWidth")
+        page.screenshot(
+            path=path,
+            clip={'x': 0, 'y': 0, 'width': content_width, 'height': content_height},
+        )
         browser.close()
     return path

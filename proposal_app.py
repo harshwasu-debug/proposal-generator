@@ -347,17 +347,63 @@ with tab_proposal:
 with tab_availability:
     st.title("Kitchen Availability")
 
-    st.subheader("🟢 Currently Vacant")
-    vacant_df   = df_all[df_all['Status'] == 'Vacant'].copy()
-    vacant_cols = ['Account Name', 'Type', 'Kitchen Number Name', 'Kitchen Size (Sq. Meters)', 'Hood Size', 'Floor Price', 'List Price', 'Floor']
-    st.dataframe(vacant_df[vacant_cols].sort_values('Account Name').reset_index(drop=True), use_container_width=True, height=350)
+    try:
+        disp_cols = ['Account Name', 'Type', 'Kitchen Number Name', 'Kitchen Size (Sq. Meters)', 'Hood Size', 'Floor Price', 'List Price', 'Floor']
+        churn_cols = ['Account Name', 'Type', 'Kitchen Number Name', 'Kitchen Size (Sq. Meters)', 'Hood Size', 'Floor Price', 'List Price', 'Churn date']
 
-    st.subheader("🟡 Upcoming Availability (Churning)")
-    churn_cols    = ['Account Name', 'Type', 'Kitchen Number Name', 'Kitchen Size (Sq. Meters)', 'Hood Size', 'Floor Price', 'List Price', 'Churn date']
-    churn_display = df_churn[churn_cols].copy()
-    churn_display['Churn date'] = pd.to_datetime(churn_display['Churn date'], errors='coerce').dt.strftime('%d %b %Y')
-    st.dataframe(churn_display.sort_values('Churn date').reset_index(drop=True), use_container_width=True, height=300)
+        # ── Filters ───────────────────────────────────────────────────────────
+        f1, f2, f3 = st.columns([2, 1, 1])
+        with f1:
+            search_term = st.text_input("Search by location or unit name", placeholder="e.g. JLT, DSO, K05...")
+        with f2:
+            filter_type = st.selectbox("Kitchen Type", ["All", "Hot Kitchen", "Cold Kitchen"])
+        with f3:
+            filter_loc  = st.selectbox("Location", ["All"] + sorted(df_all['Account Name'].unique()))
 
-    st.subheader("📊 Availability by Location")
-    summary = df_all.groupby(['Account Name', 'Status']).size().unstack(fill_value=0).reset_index()
-    st.dataframe(summary, use_container_width=True)
+        def apply_filters(df):
+            if search_term:
+                mask = (
+                    df['Account Name'].str.contains(search_term, case=False, na=False) |
+                    df['Kitchen Number Name'].str.contains(search_term, case=False, na=False)
+                )
+                df = df[mask]
+            if filter_type != "All":
+                df = df[df['Type'] == filter_type]
+            if filter_loc != "All":
+                df = df[df['Account Name'] == filter_loc]
+            return df
+
+        # ── Vacant ────────────────────────────────────────────────────────────
+        st.subheader("🟢 Currently Vacant")
+        vacant_df = apply_filters(df_all[df_all['Status'] == 'Vacant'].copy())
+        if vacant_df.empty:
+            st.info("No vacant kitchens match the current filters.")
+        else:
+            st.dataframe(
+                vacant_df[disp_cols].sort_values('Account Name').reset_index(drop=True),
+                use_container_width=True, height=320
+            )
+            st.caption(f"{len(vacant_df)} unit(s) shown")
+
+        # ── Churning ──────────────────────────────────────────────────────────
+        st.subheader("🟡 Upcoming Availability (Churning)")
+        churn_filtered = apply_filters(df_churn.copy())
+        if churn_filtered.empty:
+            st.info("No churning kitchens match the current filters.")
+        else:
+            churn_display = churn_filtered[churn_cols].copy()
+            churn_display['Churn date'] = pd.to_datetime(churn_display['Churn date'], errors='coerce').dt.strftime('%d %b %Y')
+            st.dataframe(
+                churn_display.sort_values('Churn date').reset_index(drop=True),
+                use_container_width=True, height=280
+            )
+            st.caption(f"{len(churn_display)} unit(s) shown")
+
+        # ── Summary by location ───────────────────────────────────────────────
+        st.subheader("📊 Availability by Location")
+        summary = df_all.groupby(['Account Name', 'Status']).size().unstack(fill_value=0).reset_index()
+        st.dataframe(summary, use_container_width=True)
+
+    except Exception as e:
+        st.error(f"Error loading availability data: {e}")
+        st.exception(e)

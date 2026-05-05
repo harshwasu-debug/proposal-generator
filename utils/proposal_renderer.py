@@ -188,10 +188,14 @@ def export_pdf(html: str, path: str):
 
 
 def export_image(html: str, path: str):
-    from html2image import Html2Image
-    out_dir = os.path.dirname(path)
-    fname = os.path.basename(path)
-    hti = Html2Image(output_path=out_dir, size=(820, 1100))
+    import tempfile
+    from pdf2image import convert_from_path
     full = f'<!DOCTYPE html><html><head><meta charset="utf-8"></head><body style="margin:30px;background:white;">{html}</body></html>'
-    hti.screenshot(html_str=full, save_as=fname)
+    with tempfile.NamedTemporaryFile(suffix='.pdf', delete=False) as tmp:
+        tmp_pdf = tmp.name
+    import weasyprint
+    weasyprint.HTML(string=full).write_pdf(tmp_pdf)
+    pages = convert_from_path(tmp_pdf, dpi=150, first_page=1, last_page=1)
+    pages[0].save(path, 'PNG')
+    os.remove(tmp_pdf)
     return path

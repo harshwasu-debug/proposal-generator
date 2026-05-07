@@ -75,15 +75,14 @@ def render_proposal_html(options: list, config: dict, chart_b64_map: dict = None
     cells += ''.join(f'<td class="vc bv">{_aed(o["rent"])}</td>' for o in options)
     rows.append(f'<tr>{cells}</tr>')
 
-    if any(o['category'] != 'EK' for o in options):
-        cells = '<td><b>Estimated shared utilities</b> <span style="font-weight:normal;font-size:9pt;">(excl. direct Gas &amp; Elec. for KP)</span></td>'
-        for o in options:
-            if o['category'] == 'EK':
-                cells += '<td class="vc" style="color:#888;font-style:italic;">Included</td>'
-            else:
-                val = o.get('utility_estimate')
-                cells += f'<td class="vc">{"To be advised" if val is None else _aed(val)}</td>'
-        rows.append(f'<tr>{cells}</tr>')
+    cells = '<td><b>Estimated shared utilities</b> <span style="font-weight:normal;font-size:9pt;">(excl. direct Gas &amp; Elec. for KP)</span></td>'
+    for o in options:
+        if o['category'] == 'EK':
+            cells += f'<td class="vc">{_aed(0)}</td>'
+        else:
+            val = o.get('utility_estimate')
+            cells += f'<td class="vc">{"To be advised" if val is None else _aed(val)}</td>'
+    rows.append(f'<tr>{cells}</tr>')
 
     rows.append(f'<tr class="sp"><td colspan="{col_span}"></td></tr>')
 
@@ -122,27 +121,20 @@ def render_proposal_html(options: list, config: dict, chart_b64_map: dict = None
     # When the proposal mixes kitchen types / utility conditions, attribute each
     # note to its option so the customer knows which term applies to which unit.
     def _util_note(o):
-        """Return the utility note text for one option.
-        Returns None for EK all-inclusive (nothing to mention) and for gas-ni EK."""
         cat    = o['category']
         gas_ni = o.get('gas_not_included', False)
         if cat == 'EK' and not gas_ni:
-            return None   # all-inclusive EK — no note needed
-        if gas_ni:
-            return ("Utilities are included except for direct gas, which is individually metered "
-                    "and billed directly by the gas authority based on actual consumption.")
+            return None   # all-inclusive EK — nothing to mention
+        if cat == 'EK' and gas_ni:
+            return ("EK is all inclusive except for direct gas, which is individually metered "
+                    "and billed directly by the gas authority based on consumption.")
         if cat == 'Standard':
             return ("Gas and electricity (5 kw per kitchen) are individually metered for each unit, "
                     "and charged based on actual consumption.")
-        if cat == 'Cuisinette' and not gas_ni:
-            return None   # all-inclusive Cuisinette — no note needed
-        return None
-
-    def _util_prefix(o):
-        cat = o['category']
-        if cat == 'EK':        return "For EK"
-        if cat == 'Cuisinette': return "For CUI"
-        return "For KP"
+        if cat == 'Cuisinette' and gas_ni:
+            return ("CUI is all inclusive except for direct gas, which is individually metered "
+                    "and billed directly by the gas authority based on consumption.")
+        return None   # all-inclusive Cuisinette — nothing to mention
 
     util_notes = [_util_note(o) for o in options]
 
@@ -152,17 +144,20 @@ def render_proposal_html(options: list, config: dict, chart_b64_map: dict = None
     )) > 1
 
     if mixed_utility:
+        # KP notes first (no prefix), then EK/CUI notes after
         seen_un = set()
+        kp_range_added = False
         for o, un in zip(options, util_notes):
-            if un:
-                key = (_util_prefix(o), un)
-                if key not in seen_un:
-                    notes.append(f"{_util_prefix(o)}: {un}")
-                    seen_un.add(key)
-        # KP shared-utilities range note (once, attributed)
+            if un and o['category'] == 'Standard' and un not in seen_un:
+                notes.append(un)
+                seen_un.add(un)
         if any(o['category'] == 'Standard' for o in options):
-            notes.append("For KP: estimated shared utilities AED 2,000–5,000/month "
+            notes.append("Estimated shared utilities AED 2,000–5,000/month "
                          "(covers all service charges and AMCs).")
+        for o, un in zip(options, util_notes):
+            if un and o['category'] != 'Standard' and un not in seen_un:
+                notes.append(un)
+                seen_un.add(un)
     else:
         # All options share the same conditions — no attribution needed
         all_ek      = all(o['category'] == 'EK'       for o in options)

@@ -1,14 +1,9 @@
 VAT = 1.05
 
 def round_to_50(value: float) -> float:
-    """Round to nearest 50 with threshold at 35.
-    Remainder < 35  → round down to lower 50.
-    Remainder >= 35 → round up to next 50.
-    """
-    remainder = value % 50
-    if remainder >= 35:
-        return value + (50 - remainder)   # round up
-    return value - remainder               # round down
+    """Round up to the nearest 10."""
+    import math
+    return math.ceil(value / 10) * 10
 STANDARD_MULTIPLIER  = 1.2 * VAT   # 1.26
 EK_CUI_MULTIPLIER    = 0.75 * VAT  # 0.7875
 STANDARD_DEPOSIT_MUL = 2.0

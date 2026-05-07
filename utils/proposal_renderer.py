@@ -231,9 +231,20 @@ def export_pdf(html: str, path: str):
 def export_image(html: str, path: str):
     from playwright.sync_api import sync_playwright
     with sync_playwright() as pw:
-        browser, page = _playwright_page(pw, viewport_width=900)
-        page.set_content(_full_html(html), wait_until='domcontentloaded')
-        # Measure the exact content height so we crop out all trailing whitespace
+        exe = _chromium_exe()
+        browser = pw.chromium.launch(
+            executable_path=exe,
+            args=['--no-sandbox', '--disable-setuid-sandbox', '--disable-dev-shm-usage'],
+        )
+        # Use a very tall viewport so all content (including charts) is laid out
+        page = browser.new_page(viewport={'width': 900, 'height': 6000})
+        page.set_content(_full_html(html), wait_until='load')
+        # Wait for all images (base64 charts) to finish painting
+        page.wait_for_function(
+            "() => Array.from(document.images).every(img => img.complete && img.naturalHeight > 0)"
+        )
+        page.wait_for_timeout(200)  # brief settle for layout reflow
+        # Measure tight content bounds
         content_height = page.evaluate("""() => {
             const children = document.body.children;
             if (!children.length) return document.body.scrollHeight;

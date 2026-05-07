@@ -12,7 +12,7 @@ from utils.data_loader import (
     get_default_license, UTILITY_PREFIX_MAP,
     LOCATION_SPECIFIC_NOTES, GAS_NOT_INCLUDED
 )
-from utils.calculations import calc_activation_amount, calc_deposit, is_waived, calc_total
+from utils.calculations import calc_activation_amount, calc_deposit, is_waived, calc_total, round_to_50
 from utils.proposal_renderer import render_proposal_html, export_html_file, export_pdf, export_image
 from utils.chart_generator import generate_utility_chart_base64, generate_utility_chart_streamlit
 
@@ -196,7 +196,7 @@ with tab_proposal:
                     )
                     if opt_price_mode == "Custom (% discount on List)":
                         disc_pct  = st.slider("Discount on List (%)", 0, 40, 5, 1, key=f"disc_{i}")
-                        base_rent = round(list_p * (1 - disc_pct / 100))
+                        base_rent = round_to_50(list_p * (1 - disc_pct / 100))
                         if base_rent < floor_p:
                             st.warning(f"Discounted price AED {base_rent:,.0f} is below floor AED {floor_p:,.0f}. Clamped to floor.")
                             base_rent = floor_p

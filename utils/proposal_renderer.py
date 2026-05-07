@@ -143,10 +143,11 @@ def render_proposal_html(options: list, config: dict, chart_b64_map: dict = None
         (o['category'], bool(o.get('gas_not_included'))) for o in options
     )) > 1
 
+    # EK/CUI notes collected separately — rendered AFTER the 2.95% line
+    ek_cui_notes = []
+
     if mixed_utility:
-        # KP notes first (no prefix), then EK/CUI notes after
         seen_un = set()
-        kp_range_added = False
         for o, un in zip(options, util_notes):
             if un and o['category'] == 'Standard' and un not in seen_un:
                 notes.append(un)
@@ -156,18 +157,19 @@ def render_proposal_html(options: list, config: dict, chart_b64_map: dict = None
                          "(covers all service charges and AMCs).")
         for o, un in zip(options, util_notes):
             if un and o['category'] != 'Standard' and un not in seen_un:
-                notes.append(un)
+                ek_cui_notes.append(un)   # deferred — goes after 2.95%
                 seen_un.add(un)
     else:
-        # All options share the same conditions — no attribution needed
         all_ek      = all(o['category'] == 'EK'       for o in options)
         any_standard= any(o['category'] == 'Standard' for o in options)
         gas_ni_any  = any(o.get('gas_not_included')    for o in options)
 
         if all_ek and not gas_ni_any:
-            pass  # all-inclusive EK — nothing to mention in notes
+            pass  # all-inclusive EK — nothing to mention
         elif gas_ni_any:
-            notes.append("Utilities are included except for direct gas, which is individually metered and billed directly by the gas authority based on actual consumption.")
+            ek_cui_notes.append(
+                "Utilities are included except for direct gas, which is individually metered "
+                "and billed directly by the gas authority based on actual consumption.")
         if any_standard:
             notes.append("Gas and electricity (5 kw per kitchen) are individually metered for each unit, and charged based on actual consumption")
             notes.append("The estimation of shared utilities is ±2,000-5,000 monthly at KP facilities (covers all service charges and AMCs)")
@@ -180,6 +182,10 @@ def render_proposal_html(options: list, config: dict, chart_b64_map: dict = None
     notes.append("2.95% processing fee for delivery orders (through aggregators) or 400 AED Fixed (commissary kitchens)")
 
     for note in notes:
+        rows.append(f'<tr><td colspan="{col_span}" class="nt">{_esc(note)}</td></tr>')
+
+    # EK/CUI utility notes — always after 2.95%
+    for note in ek_cui_notes:
         rows.append(f'<tr><td colspan="{col_span}" class="nt">{_esc(note)}</td></tr>')
 
     # ── Location-specific notes ───────────────────────────────────────────────

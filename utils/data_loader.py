@@ -72,15 +72,8 @@ GAS_NOT_INCLUDED = {
 }
 
 LOCATION_SPECIFIC_NOTES = {
-    "UAE - AD - Raha (1) - EK": [
-        "Utilities are included except for direct gas, which is individually metered and billed directly by the gas authority based on actual consumption."
-    ],
-    "UAE - DXB - Business Bay (5) - Cuisinette": [
-        "Utilities are included except for direct gas, which is individually metered and billed directly by the gas authority based on actual consumption."
-    ],
-    "UAE - SHJ - Muwaileh - EK": [
-        "Utilities are included except for direct gas, which is individually metered and billed directly by the gas authority based on actual consumption."
-    ],
+    # Gas note for these locations is handled by the renderer via gas_not_included flag —
+    # do NOT duplicate it here.
     "UAE - SHJ - Centre": [
         "Gas connection activation fee: AED 300 per connection.",
         "Kiosk permit is charged as a monthly subscription fee.",

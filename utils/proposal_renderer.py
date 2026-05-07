@@ -114,18 +114,54 @@ def render_proposal_html(options: list, config: dict, chart_b64_map: dict = None
         "Note: *Starting from 24m terms, payable monthly (first cheques needed for move-in). The notice period is 3 months.",
     ]
 
-    # Utility note — depends on category and gas-inclusion status
-    gas_not_included = any(o.get('gas_not_included') for o in options)
-    all_ek = all(o['category'] == 'EK' for o in options)
-    any_standard = any(o['category'] == 'Standard' for o in options)
+    # ── Utility notes ────────────────────────────────────────────────────────
+    # When the proposal mixes kitchen types / utility conditions, attribute each
+    # note to its option so the customer knows which term applies to which unit.
+    def _util_note(o):
+        """Return the utility note text for one option (None = no note needed)."""
+        cat    = o['category']
+        gas_ni = o.get('gas_not_included', False)
+        if cat == 'EK' and not gas_ni:
+            return "EK kitchen — all utilities are included in the price (incl. direct gas & electricity)."
+        if gas_ni:
+            return ("Utilities are included except for direct gas, which is individually metered "
+                    "and billed directly by the gas authority based on actual consumption.")
+        if cat == 'Standard':
+            return ("Gas and electricity (5 kw per kitchen) are individually metered for each unit, "
+                    "and charged based on actual consumption.")
+        if cat == 'Cuisinette' and not gas_ni:
+            return "Cuisinette kitchen — all utilities included."
+        return None
 
-    if all_ek and not gas_not_included:
-        notes.append("EK facilities are all-inclusive: all utilities are included in the price including direct gas and electricity.")
-    elif gas_not_included:
-        notes.append("Utilities are included except for direct gas, which is individually metered and billed directly by the gas authority based on actual consumption.")
-    if any_standard:
-        notes.append("Gas and electricity (5 kw per kitchen) are individually metered for each unit, and charged based on actual consumption")
-        notes.append("The estimation of shared utilities is ±2,000-5,000 monthly at KP facilities (covers all service charges and AMCs)")
+    util_notes = [_util_note(o) for o in options]
+
+    # Decide whether attribution is needed: multi-option with differing conditions
+    mixed_utility = is_multi and len(set(
+        (o['category'], bool(o.get('gas_not_included'))) for o in options
+    )) > 1
+
+    if mixed_utility:
+        for o, un in zip(options, util_notes):
+            if un:
+                notes.append(f"{o['label']}: {un}")
+        # Standard-specific shared-utilities range note (attributed)
+        for o in options:
+            if o['category'] == 'Standard':
+                notes.append(f"{o['label']}: estimated shared utilities AED 2,000–5,000/month at KP facilities "
+                              f"(covers all service charges and AMCs).")
+    else:
+        # All options share the same conditions — no attribution needed
+        all_ek      = all(o['category'] == 'EK'       for o in options)
+        any_standard= any(o['category'] == 'Standard' for o in options)
+        gas_ni_any  = any(o.get('gas_not_included')    for o in options)
+
+        if all_ek and not gas_ni_any:
+            notes.append("EK facilities are all-inclusive: all utilities are included in the price including direct gas and electricity.")
+        elif gas_ni_any:
+            notes.append("Utilities are included except for direct gas, which is individually metered and billed directly by the gas authority based on actual consumption.")
+        if any_standard:
+            notes.append("Gas and electricity (5 kw per kitchen) are individually metered for each unit, and charged based on actual consumption")
+            notes.append("The estimation of shared utilities is ±2,000-5,000 monthly at KP facilities (covers all service charges and AMCs)")
 
     notes.append("Only the monthly rate is paid pre-paid. Utilities are post-paid, except the fixed charges.")
     if config.get('show_mall_note'):
@@ -137,13 +173,17 @@ def render_proposal_html(options: list, config: dict, chart_b64_map: dict = None
     for note in notes:
         rows.append(f'<tr><td colspan="{col_span}" class="nt">{_esc(note)}</td></tr>')
 
-    # Location-specific notes (deduplicated)
+    # ── Location-specific notes ───────────────────────────────────────────────
+    # Attribute to option label when multiple locations are involved.
+    multi_loc = is_multi and len(set(o['location_display'] for o in options)) > 1
     seen_loc_notes = set()
     for o in options:
         for ln in o.get('location_notes', []):
-            if ln not in seen_loc_notes:
-                rows.append(f'<tr><td colspan="{col_span}" class="nt">{_esc(ln)}</td></tr>')
-                seen_loc_notes.add(ln)
+            key = ln  # deduplicate by text across options at same location
+            if key not in seen_loc_notes:
+                prefix = f"{o['label']}: " if multi_loc else ""
+                rows.append(f'<tr><td colspan="{col_span}" class="nt">{_esc(prefix + ln)}</td></tr>')
+                seen_loc_notes.add(key)
 
     # Comments
     comments = config.get('comments', '').strip()

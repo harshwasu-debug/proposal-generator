@@ -112,8 +112,9 @@ with tab_proposal:
 
         # Step 3: Per-option configuration
         st.subheader("Step 3 — Per-option Details")
-        options_data  = []
-        chart_b64_map = {}
+        options_data    = []
+        chart_b64_map   = {}
+        seen_util_for_loc = {}   # acc_name -> utility_val (one estimator per location)
 
         for i, opt in enumerate(options):
             acc_name     = opt['account_name']
@@ -136,11 +137,13 @@ with tab_proposal:
             churn_dt = unit_row.get('Churn date')
             status   = unit_row.get('Status', '')
 
+            first_at_loc = acc_name not in seen_util_for_loc
+
             with st.expander(f"Option {i+1}: {unit_name}  [{status}]", expanded=True):
 
-                # Utility estimator panel
+                # Utility estimator — show once per location only
                 util_data = get_utility_estimate(acc_name, kitchen_type)
-                if util_data and cat != 'EK':
+                if first_at_loc and util_data and cat != 'EK':
                     with st.container(border=True):
                         st.markdown(f"**Utility Estimator — {acc_name} ({kitchen_type})**")
                         u_c1, u_c2, u_c3 = st.columns(3)
@@ -210,7 +213,15 @@ with tab_proposal:
 
                     if cat == 'EK':
                         utility_val = None
-                        st.info("EK — utilities included in rent.")
+                        if first_at_loc:
+                            st.info("EK — utilities included in rent.")
+                    elif not first_at_loc:
+                        # Inherit utility value from the first option at this location
+                        utility_val = seen_util_for_loc.get(acc_name)
+                        if utility_val is not None:
+                            st.caption(f"Utility estimate: AED {utility_val:,.0f} (shared with first option at this location)")
+                        else:
+                            st.caption("Utility estimate: TBA (shared with first option at this location)")
                     elif util_data:
                         util_choice = st.selectbox(
                             "Utility estimate to show in proposal",
@@ -249,6 +260,10 @@ with tab_proposal:
                                 utility_val = None
                         else:
                             utility_val = None
+
+                    # Store utility val for this location after first encounter
+                    if first_at_loc and cat != 'EK':
+                        seen_util_for_loc[acc_name] = utility_val
 
                     per_unit_waive = st.checkbox("Waive activation fee", value=waive_all, key=f"waive_{i}")
 

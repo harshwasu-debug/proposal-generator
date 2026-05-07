@@ -119,11 +119,12 @@ def render_proposal_html(options: list, config: dict, chart_b64_map: dict = None
     # When the proposal mixes kitchen types / utility conditions, attribute each
     # note to its option so the customer knows which term applies to which unit.
     def _util_note(o):
-        """Return the utility note text for one option (None = no note needed)."""
+        """Return the utility note text for one option.
+        Returns None for EK all-inclusive (nothing to mention) and for gas-ni EK."""
         cat    = o['category']
         gas_ni = o.get('gas_not_included', False)
         if cat == 'EK' and not gas_ni:
-            return "EK kitchen — all utilities are included in the price (incl. direct gas & electricity)."
+            return None   # all-inclusive EK — no note needed
         if gas_ni:
             return ("Utilities are included except for direct gas, which is individually metered "
                     "and billed directly by the gas authority based on actual consumption.")
@@ -131,8 +132,14 @@ def render_proposal_html(options: list, config: dict, chart_b64_map: dict = None
             return ("Gas and electricity (5 kw per kitchen) are individually metered for each unit, "
                     "and charged based on actual consumption.")
         if cat == 'Cuisinette' and not gas_ni:
-            return "Cuisinette kitchen — all utilities included."
+            return None   # all-inclusive Cuisinette — no note needed
         return None
+
+    def _util_prefix(o):
+        cat = o['category']
+        if cat == 'EK':        return "For EK"
+        if cat == 'Cuisinette': return "For CUI"
+        return "For KP"
 
     util_notes = [_util_note(o) for o in options]
 
@@ -142,14 +149,17 @@ def render_proposal_html(options: list, config: dict, chart_b64_map: dict = None
     )) > 1
 
     if mixed_utility:
+        seen_un = set()
         for o, un in zip(options, util_notes):
             if un:
-                notes.append(f"{o['label']}: {un}")
-        # Standard-specific shared-utilities range note (attributed)
-        for o in options:
-            if o['category'] == 'Standard':
-                notes.append(f"{o['label']}: estimated shared utilities AED 2,000–5,000/month at KP facilities "
-                              f"(covers all service charges and AMCs).")
+                key = (_util_prefix(o), un)
+                if key not in seen_un:
+                    notes.append(f"{_util_prefix(o)}: {un}")
+                    seen_un.add(key)
+        # KP shared-utilities range note (once, attributed)
+        if any(o['category'] == 'Standard' for o in options):
+            notes.append("For KP: estimated shared utilities AED 2,000–5,000/month "
+                         "(covers all service charges and AMCs).")
     else:
         # All options share the same conditions — no attribution needed
         all_ek      = all(o['category'] == 'EK'       for o in options)
@@ -157,7 +167,7 @@ def render_proposal_html(options: list, config: dict, chart_b64_map: dict = None
         gas_ni_any  = any(o.get('gas_not_included')    for o in options)
 
         if all_ek and not gas_ni_any:
-            notes.append("EK facilities are all-inclusive: all utilities are included in the price including direct gas and electricity.")
+            pass  # all-inclusive EK — nothing to mention in notes
         elif gas_ni_any:
             notes.append("Utilities are included except for direct gas, which is individually metered and billed directly by the gas authority based on actual consumption.")
         if any_standard:

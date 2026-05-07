@@ -75,11 +75,14 @@ def render_proposal_html(options: list, config: dict, chart_b64_map: dict = None
     cells += ''.join(f'<td class="vc bv">{_aed(o["rent"])}</td>' for o in options)
     rows.append(f'<tr>{cells}</tr>')
 
-    if cat != 'EK':
+    if any(o['category'] != 'EK' for o in options):
         cells = '<td><b>Estimated shared utilities</b> <span style="font-weight:normal;font-size:9pt;">(excl. direct Gas &amp; Elec. for KP)</span></td>'
         for o in options:
-            val = o.get('utility_estimate')
-            cells += f'<td class="vc">{"To be advised" if val is None else _aed(val)}</td>'
+            if o['category'] == 'EK':
+                cells += '<td class="vc" style="color:#888;font-style:italic;">Included</td>'
+            else:
+                val = o.get('utility_estimate')
+                cells += f'<td class="vc">{"To be advised" if val is None else _aed(val)}</td>'
         rows.append(f'<tr>{cells}</tr>')
 
     rows.append(f'<tr class="sp"><td colspan="{col_span}"></td></tr>')

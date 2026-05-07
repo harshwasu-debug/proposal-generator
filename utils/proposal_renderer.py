@@ -1,3 +1,4 @@
+# v2 — per-option utility attribution for mixed proposals
 import os
 
 TEAL   = "#2D7070"

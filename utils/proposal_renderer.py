@@ -77,7 +77,7 @@ def render_proposal_html(options: list, config: dict, chart_b64_map: dict = None
 
     cells = '<td><b>Estimated shared utilities</b> <span style="font-weight:normal;font-size:9pt;">(excl. direct Gas &amp; Elec. for KP)</span></td>'
     for o in options:
-        if o['category'] == 'EK':
+        if o['category'] in ('EK', 'Cuisinette'):
             cells += f'<td class="vc">{_aed(0)}</td>'
         else:
             val = o.get('utility_estimate')

@@ -211,10 +211,10 @@ with tab_proposal:
                     st.caption(f"Floor: AED {floor_p:,.0f}  |  List: AED {list_p:,.0f}")
                     rent = st.number_input("Monthly rent (AED)", value=float(base_rent), min_value=float(floor_p), step=100.0, key=f"rent_{i}")
 
-                    if cat == 'EK':
-                        utility_val = None
+                    if cat in ('EK', 'Cuisinette'):
+                        utility_val = 0
                         if first_at_loc:
-                            st.info("EK — utilities included in rent.")
+                            st.info(f"{cat} — utilities included (AED 0).")
                     elif not first_at_loc:
                         # Inherit utility value from the first option at this location
                         utility_val = seen_util_for_loc.get(acc_name)

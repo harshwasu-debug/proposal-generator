@@ -216,13 +216,16 @@ def render_proposal_html(options: list, config: dict, chart_b64_map: dict = None
     # Append utility chart(s) if provided
     if chart_b64_map:
         for idx, b64 in chart_b64_map.items():
-            label = f"Option {idx + 1} — " if len(chart_b64_map) > 1 else ""
+            o = options[idx]
+            unit_line = o['unit_specs'].split('\n')[0].strip()
+            loc_line  = o['location_display'].strip()
+            heading   = f"{loc_line} — {unit_line}"
             proposal_html += f'''
-            <div class="pw" style="margin-top:24px;">
+            <div class="pw" style="margin-top:24px;page-break-inside:avoid;">
                 <div style="font-family:Arial,sans-serif;font-size:10pt;font-weight:bold;margin-bottom:6px;">
-                    {label}Utility Estimate (Shared Only — excl. Direct Gas &amp; Electricity)
+                    {_esc(heading)} — Utility Estimate (Shared Only — excl. Direct Gas &amp; Electricity)
                 </div>
-                <img src="data:image/png;base64,{b64}" style="width:100%;max-width:780px;">
+                <img src="data:image/png;base64,{b64}" style="width:100%;max-width:780px;display:block;">
             </div>'''
 
     return proposal_html

@@ -18,7 +18,7 @@ def calc_deposit(rent: float, category: str, deposit_multiplier: float) -> float
     return round(rent * mul)
 
 def is_waived(license_type: str, manually_waived: bool) -> bool:
-    return license_type == "DMCC TL" or manually_waived
+    return manually_waived
 
 def calc_total(deposit: float, activation_fee: float) -> float:
     return deposit + activation_fee

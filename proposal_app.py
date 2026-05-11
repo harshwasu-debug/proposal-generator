@@ -156,7 +156,11 @@ with tab_proposal:
                             if include_chart:
                                 b64 = generate_utility_chart_base64(acc_name, kitchen_type)
                                 if b64:
-                                    chart_b64_map[i] = b64
+                                    loc_label  = (acc_name
+                                        .replace("UAE - DXB - ", "").replace("UAE - AD - ", "")
+                                        .replace("UAE - SHJ - ", "").replace("UAE - AN - ", ""))
+                                    unit_label = unit_name.split(' - UAE')[0].strip() if ' - UAE' in unit_name else unit_name
+                                    chart_b64_map[i] = (b64, f"{loc_label} — {unit_label}")
 
                 st.divider()
                 c1, c2 = st.columns(2)

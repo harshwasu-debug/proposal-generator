@@ -212,8 +212,16 @@ with tab_proposal:
                     else:
                         base_rent = list_p
 
+                    # Force-reset rent input when price mode changes so the correct
+                    # base value is always shown, regardless of prior session state.
+                    rent_key      = f"rent_{i}"
+                    prev_mode_key = f"prev_pm_{i}"
+                    if st.session_state.get(prev_mode_key) != opt_price_mode:
+                        st.session_state[rent_key] = float(base_rent)
+                        st.session_state[prev_mode_key] = opt_price_mode
+
                     st.caption(f"Floor: AED {floor_p:,.0f}  |  List: AED {list_p:,.0f}")
-                    rent = st.number_input("Monthly rent (AED)", value=float(base_rent), min_value=float(floor_p), step=100.0, key=f"rent_{i}_{opt_price_mode}")
+                    rent = st.number_input("Monthly rent (AED)", value=float(base_rent), min_value=float(floor_p), step=100.0, key=rent_key)
 
                     if cat in ('EK', 'Cuisinette'):
                         utility_val = 0

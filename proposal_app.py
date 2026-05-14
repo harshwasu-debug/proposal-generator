@@ -213,7 +213,7 @@ with tab_proposal:
                         base_rent = list_p
 
                     st.caption(f"Floor: AED {floor_p:,.0f}  |  List: AED {list_p:,.0f}")
-                    rent = st.number_input("Monthly rent (AED)", value=float(base_rent), min_value=float(floor_p), step=100.0, key=f"rent_{i}")
+                    rent = st.number_input("Monthly rent (AED)", value=float(base_rent), min_value=float(floor_p), step=100.0, key=f"rent_{i}_{opt_price_mode}")
 
                     if cat in ('EK', 'Cuisinette'):
                         utility_val = 0

@@ -279,10 +279,26 @@ with tab_proposal:
 
                     per_unit_waive = st.checkbox("Waive activation fee", value=waive_all, key=f"waive_{i}")
 
-                activation_display = calc_activation_amount(rent, cat)
+                calc_activation    = calc_activation_amount(rent, cat)
                 waived             = is_waived(license_type, per_unit_waive or waive_all)
-                activation_fee     = 0.0 if waived else activation_display
-                deposit            = calc_deposit(rent, cat, deposit_multiplier)
+
+                with st.expander("⚙️ Override activation fee", expanded=False):
+                    act_key      = f"act_override_{i}"
+                    prev_act_key = f"prev_act_rent_{i}"
+                    # Reset override whenever rent changes so the default tracks rent
+                    if st.session_state.get(prev_act_key) != rent:
+                        st.session_state[act_key]      = float(calc_activation)
+                        st.session_state[prev_act_key] = rent
+                    activation_display = st.number_input(
+                        "Activation fee (AED, incl. VAT)",
+                        value=float(calc_activation),
+                        min_value=0.0, step=100.0,
+                        key=act_key,
+                        help=f"Auto-calculated: AED {calc_activation:,.0f}. Edit to override."
+                    )
+
+                activation_fee = 0.0 if waived else activation_display
+                deposit        = calc_deposit(rent, cat, deposit_multiplier)
                 total              = calc_total(deposit, activation_fee)
 
                 st.markdown(

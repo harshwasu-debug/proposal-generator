@@ -90,6 +90,7 @@ with tab_proposal:
                     'account_name': add_loc,
                     'kitchen_type': add_type,
                     'unit_name':    add_unit,
+                    'status':       status_map.get(add_unit, ''),
                 })
                 st.rerun()
 
@@ -98,7 +99,9 @@ with tab_proposal:
         for i, opt in enumerate(st.session_state.proposal_options):
             r1, r2 = st.columns([8, 1])
             with r1:
-                st.markdown(f"**Option {i+1}:** {opt['unit_name']}  —  {opt['account_name']}")
+                s    = opt.get('status', '')
+                icon = {"Vacant": "🟢", "Churning": "🟡", "Occupied": "🔴"}.get(s, "")
+                st.markdown(f"**Option {i+1}:** {opt['unit_name']}  —  {opt['account_name']}  {icon} {s}")
             with r2:
                 if st.button("X", key=f"remove_{i}"):
                     st.session_state.proposal_options.pop(i)

@@ -23,19 +23,22 @@ os.makedirs(EXPORTS_DIR, exist_ok=True)
 
 LICENSE_OPTIONS = ["DMCC TL", "DET TL", "DET TL + Kiosk Permit", "TL + Kiosk Permit", "Reem TL", "Other"]
 
+_KITCHEN_JSON = os.path.join(os.path.dirname(os.path.abspath(__file__)), "Raw Data", "JSON", "Kitchen Tracker", "SF Kitchen Data.json")
+
 @st.cache_data
-def load_data():
+def load_data(_mtime):
     return get_available_kitchens()
 
 @st.cache_data
-def load_all_kitchens():
+def load_all_kitchens(_mtime):
     return get_all_kitchens()
 
 @st.cache_data
-def load_churning():
+def load_churning(_mtime):
     return get_churning_kitchens()
 
-df_churn = load_churning()
+_json_mtime = os.path.getmtime(_KITCHEN_JSON)
+df_churn    = load_churning(_json_mtime)
 
 if 'proposal_options' not in st.session_state:
     st.session_state.proposal_options = []
@@ -53,7 +56,7 @@ with tab_proposal:
     st.caption("Each option becomes a column in the proposal. Options can be from different locations.")
 
     show_all = st.checkbox("Show all kitchens (including occupied)", value=False)
-    df_all   = load_all_kitchens() if show_all else load_data()
+    df_all   = load_all_kitchens(_json_mtime) if show_all else load_data(_json_mtime)
 
     with st.container(border=True):
         add_col1, add_col2, add_col3, add_col4 = st.columns([2, 1, 3, 1])

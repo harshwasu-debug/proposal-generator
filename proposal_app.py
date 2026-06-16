@@ -67,12 +67,25 @@ with tab_proposal:
         type_df_add    = loc_df_add[loc_df_add['Type'] == add_type]
         existing_units = [o['unit_name'] for o in st.session_state.proposal_options]
         available      = [u for u in type_df_add['Kitchen Number Name'].tolist() if u not in existing_units]
+
+        # Build status lookup for the dropdown labels
+        status_map  = dict(zip(type_df_add['Kitchen Number Name'], type_df_add['Status']))
+        status_icon = {"Vacant": "🟢", "Churning": "🟡", "Occupied": "🔴"}
+        def unit_label(u):
+            icon = status_icon.get(status_map.get(u, ""), "")
+            s    = status_map.get(u, "")
+            return f"{u}  {icon} {s}" if s else u
+
         with add_col3:
-            add_unit = st.selectbox("Unit", available if available else ["— no units available —"], key="add_unit")
+            if available:
+                add_unit = st.selectbox("Unit", available, format_func=unit_label, key="add_unit")
+            else:
+                st.selectbox("Unit", ["— no units available —"], key="add_unit")
+                add_unit = None
         with add_col4:
             st.write("")
             st.write("")
-            if st.button("Add Option", type="primary", disabled=(not available)):
+            if st.button("Add Option", type="primary", disabled=(not available or add_unit is None)):
                 st.session_state.proposal_options.append({
                     'account_name': add_loc,
                     'kitchen_type': add_type,

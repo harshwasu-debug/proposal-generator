@@ -55,6 +55,7 @@ DEFAULT_LICENSE_MAP = {
     "UAE - DXB - Jabal Ali":             "DET TL + Kiosk Permit",
     # Abu Dhabi
     "UAE - AD - City of Light":          "DET TL + Kiosk Permit",
+    "UAE - AD - Reem Island":            "DET TL + Kiosk Permit",
     "UAE - AD - Al Nahyan":              "DET TL + Kiosk Permit",
     "UAE - AD - Raha (1) - EK":          "DET TL + Kiosk Permit",
     # Sharjah

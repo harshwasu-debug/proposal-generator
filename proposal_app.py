@@ -21,7 +21,7 @@ st.set_page_config(page_title="SF Proposal Generator", layout="wide", page_icon=
 EXPORTS_DIR = os.path.join(os.path.dirname(os.path.abspath(__file__)), "exports")
 os.makedirs(EXPORTS_DIR, exist_ok=True)
 
-LICENSE_OPTIONS = ["DMCC TL", "DET TL", "DET TL + Kiosk Permit", "TL + Kiosk Permit", "Other"]
+LICENSE_OPTIONS = ["DMCC TL", "DET TL", "DET TL + Kiosk Permit", "TL + Kiosk Permit", "Reem TL", "Other"]
 
 @st.cache_data
 def load_data():

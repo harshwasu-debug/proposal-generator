@@ -103,6 +103,10 @@ def get_available_kitchens():
     df = load_kitchen_df()
     return df[df['Status'].isin(['Vacant', 'Churning'])].copy()
 
+def get_all_kitchens():
+    """All kitchens regardless of status (for proposals on occupied units)."""
+    return load_kitchen_df().copy()
+
 def get_churning_kitchens():
     df = load_kitchen_df()
     return df[df['Status'] == 'Churning'].copy()

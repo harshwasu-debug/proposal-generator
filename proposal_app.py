@@ -6,7 +6,7 @@ from datetime import date, timedelta
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 
 from utils.data_loader import (
-    get_available_kitchens, get_churning_kitchens,
+    get_available_kitchens, get_all_kitchens, get_churning_kitchens,
     kitchen_category, get_utility_estimate,
     get_similar_location_utility,
     get_default_license, UTILITY_PREFIX_MAP,
@@ -28,10 +28,13 @@ def load_data():
     return get_available_kitchens()
 
 @st.cache_data
+def load_all_kitchens():
+    return get_all_kitchens()
+
+@st.cache_data
 def load_churning():
     return get_churning_kitchens()
 
-df_all   = load_data()
 df_churn = load_churning()
 
 if 'proposal_options' not in st.session_state:
@@ -48,6 +51,9 @@ with tab_proposal:
     # Step 1: Build option list
     st.subheader("Step 1 — Add Kitchen Options")
     st.caption("Each option becomes a column in the proposal. Options can be from different locations.")
+
+    show_all = st.checkbox("Show all kitchens (including occupied)", value=False)
+    df_all   = load_all_kitchens() if show_all else load_data()
 
     with st.container(border=True):
         add_col1, add_col2, add_col3, add_col4 = st.columns([2, 1, 3, 1])
@@ -139,7 +145,8 @@ with tab_proposal:
 
             first_at_loc = acc_name not in seen_util_for_loc
 
-            with st.expander(f"Option {i+1}: {unit_name}  [{status}]", expanded=True):
+            status_tag = {"Vacant": "🟢 Vacant", "Churning": "🟡 Churning", "Occupied": "🔴 Occupied"}.get(status, status)
+            with st.expander(f"Option {i+1}: {unit_name}  [{status_tag}]", expanded=True):
 
                 # Utility estimator — show once per location only
                 util_data = get_utility_estimate(acc_name, kitchen_type)

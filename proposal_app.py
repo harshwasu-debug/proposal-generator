@@ -68,13 +68,15 @@ with tab_proposal:
         existing_units = [o['unit_name'] for o in st.session_state.proposal_options]
         available      = [u for u in type_df_add['Kitchen Number Name'].tolist() if u not in existing_units]
 
-        # Build status lookup for the dropdown labels
+        # Build lookup maps for the dropdown labels
         status_map  = dict(zip(type_df_add['Kitchen Number Name'], type_df_add['Status']))
+        size_map    = dict(zip(type_df_add['Kitchen Number Name'], type_df_add['Kitchen Size (Sq. Meters)']))
         status_icon = {"Vacant": "🟢", "Churning": "🟡", "Occupied": "🔴"}
         def unit_label(u):
             icon = status_icon.get(status_map.get(u, ""), "")
-            s    = status_map.get(u, "")
-            return f"{u}  {icon} {s}" if s else u
+            sz   = size_map.get(u, "")
+            sz_str = f"  {sz} sqm" if sz and sz not in ("", "None", "nan") else ""
+            return f"{u}{sz_str}  {icon}" if icon else f"{u}{sz_str}"
 
         with add_col3:
             if available:

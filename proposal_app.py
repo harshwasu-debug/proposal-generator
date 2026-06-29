@@ -55,7 +55,7 @@ with tab_proposal:
     st.subheader("Step 1 — Add Kitchen Options")
     st.caption("Each option becomes a column in the proposal. Options can be from different locations.")
 
-    show_all = st.checkbox("Show all kitchens (including occupied)", value=False)
+    show_all = st.checkbox("Show all kitchens (including occupied)", value=False, key="show_all_kitchens")
     df_all   = load_all_kitchens(_json_mtime) if show_all else load_data(_json_mtime)
 
     with st.container(border=True):
